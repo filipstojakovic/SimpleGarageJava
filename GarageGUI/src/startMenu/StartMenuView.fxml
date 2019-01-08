@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="383.0" prefWidth="291.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="startMenu.StartMenuController">
+   <children>
+      <Pane>
+         <children>
+            <TabPane prefHeight="400.0" prefWidth="341.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="LOGIN">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" layoutX="71.0" layoutY="49.0" prefHeight="270.0" prefWidth="199.0">
+                                 <children>
+                                    <Label alignment="CENTER" text="User name:">
+                                       <VBox.margin>
+                                          <Insets bottom="25.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="usernameField">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label text="Password:">
+                                       <VBox.margin>
+                                          <Insets bottom="25.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <PasswordField fx:id="passwordField">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </PasswordField>
+                                    <Button mnemonicParsing="false" onAction="#LoginButtonClicked" text="Login">
+                                       <VBox.margin>
+                                          <Insets bottom="25.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="SIGNIN">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" layoutX="63.0" layoutY="10.0" prefHeight="320.0" prefWidth="215.0">
+                                 <children>
+                                    <Label text="Choose username:">
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="signInUsernameField">
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label text="Choose password:">
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <PasswordField fx:id="signInPasswordField">
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </PasswordField>
+                                    <Label text="Confirm password:">
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <PasswordField fx:id="signInConfPasswordField">
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </PasswordField>
+                                    <HBox prefHeight="18.0" prefWidth="172.0">
+                                       <children>
+                                          <RadioButton fx:id="userRb" mnemonicParsing="false" selected="true" text="as user">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="group" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="adminRb" mnemonicParsing="false" text="as admin" toggleGroup="$group">
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </RadioButton>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <Button mnemonicParsing="false" onAction="#signInButtonClicked" text="Sign in">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
