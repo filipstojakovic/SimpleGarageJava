@@ -3,11 +3,12 @@ package vehicle.VhiecelEnum;
 import utils.UtilMethods;
 import vehicle.vehicleType.Car;
 
+import java.io.File;
 import java.util.Random;
 
 public enum CarModelImageEnum
 {
-    BMW("./car images/bmw.jpeg"), OPEL(""), GOLF(""), RENO("");
+    BMW("."+ File.separator+"car images"+ File.separator+"bmw.jpeg"), OPEL(""), GOLF(""), RENO("");
 
     private String path;
     private CarModelImageEnum(String path)

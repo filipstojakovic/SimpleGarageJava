@@ -1,44 +1,63 @@
 package platform.Field;
 
+import vehicle.Vehicle;
+
 public class Field
 {
-    private int xCoordinate;
-    private int yCoordinate;
-    private FieldTypeEnum type=null;
-    private boolean isFree=false;
+    private int rowPosition;
+    private int columnPosition;
+    private Vehicle vehicleOnField;
+    private FieldTypeEnum type = null;
+    private boolean isFree = true;
 
-
-    public Field(FieldTypeEnum type,int x,int y)
+    public Field(FieldTypeEnum type, int x, int y)
     {
-        this.type=type;
-        xCoordinate=x;
-        yCoordinate=y;
+        this.type = type;
+        rowPosition = x;
+        columnPosition = y;
     }
 
-    public Field(int x,int y)
+    public Field(int x, int y)
     {
-        xCoordinate=x;
-        yCoordinate=y;
+        rowPosition = x;
+        columnPosition = y;
     }
 
-    public int getxCoordinate()
+    public Vehicle getVehicleOnField()
     {
-        return xCoordinate;
+        return vehicleOnField;
     }
 
-    public void setxCoordinate(int xCoordinate)
+    public void setVehicleOnField(Vehicle vehicleOnField)
     {
-        this.xCoordinate = xCoordinate;
+        this.vehicleOnField = vehicleOnField;
+        isFree=false;
     }
 
-    public int getyCoordinate()
+    public void removeVehicleFromField()
     {
-        return yCoordinate;
+        vehicleOnField=null;
+        isFree=true;
     }
 
-    public void setyCoordinate(int yCoordinate)
+    public int getRowPosition()
     {
-        this.yCoordinate = yCoordinate;
+        return rowPosition;
+    }
+
+    public void setRowPosition(int rowPosition)
+    {
+        this.rowPosition = rowPosition;
+    }
+
+    public int getColumnPosition()
+    {
+        return columnPosition;
+    }
+
+    public void setColumnPosition(int columnPosition)
+    {
+        this.columnPosition = columnPosition;
     }
 
     public FieldTypeEnum getType()
@@ -58,6 +77,12 @@ public class Field
 
     public void setFree(boolean free)
     {
+
         isFree = free;
+    }
+
+    public String toString()
+    {
+        return "Field row= "+ rowPosition +" col= "+ columnPosition;
     }
 }

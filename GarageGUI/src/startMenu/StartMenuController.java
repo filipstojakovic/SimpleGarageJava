@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import userGarageView.UserGarageController;
 
 import java.io.*;
 import java.net.URL;
@@ -25,11 +24,11 @@ public class StartMenuController implements Initializable
     @FXML
     private PasswordField passwordField;
     @FXML
-    private TextField signInUsernameField;
+    private TextField signUpUsernameField;
     @FXML
-    private PasswordField signInPasswordField;
+    private PasswordField signUpPasswordField;
     @FXML
-    private PasswordField signInConfPasswordField;
+    private PasswordField signUpConfPasswordField;
     @FXML
     private RadioButton userRb;
     @FXML
@@ -37,8 +36,11 @@ public class StartMenuController implements Initializable
     @FXML
     private RadioButton adminRb;
 
+
+
+
     @FXML
-    void LoginButtonClicked(ActionEvent event) throws IOException
+    void loginButtonClicked(ActionEvent event) throws IOException
     {
         System.out.println("LOGIN CURRENT LIST SIZE: " + usersList.size());
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
@@ -61,23 +63,42 @@ public class StartMenuController implements Initializable
             else
                 al.setContentText("LOGED IN AS USER!");
 
-            al.showAndWait();
+
+            //al.showAndWait();
 
             serializeUserList();
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../userGarageView/UserGarageView.fxml"));
-            Parent userGarageParent = loader.load();
-            Scene userGarageScene = new Scene(userGarageParent);
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource(".." + File.separatorChar + "userGarageView" + File.separatorChar + "GarageTextView.fxml"));
+                Parent userGarageParent = loader.load();
+                Scene userGarageScene = new Scene(userGarageParent);
 
-            UserGarageController userGarageController = loader.getController();
-            userGarageController.initializeUser(user);
+                //                UserGarageController userGarageController = loader.getController();
+                //                userGarageController.initializeUser(user);
 
-            Stage userGarageStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            userGarageStage.setScene(userGarageScene);
-            userGarageStage.setTitle(user.getUsername() + " Garage");
-            userGarageStage.centerOnScreen();
-            userGarageStage.show();
+                Stage userGarageStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                userGarageStage.setScene(userGarageScene);
+                userGarageStage.setTitle(user.getUsername() + " Garage");
+                userGarageStage.centerOnScreen();
+
+                userGarageStage.show();
+
+            } catch (Exception ex)
+            {
+                System.out.println("WWWWWWWWWWWW");
+                ex.printStackTrace();
+                try
+                {
+                    Thread.sleep(2000);
+                } catch (Exception ex1)
+                {
+                    ex1.printStackTrace();
+                }
+                System.exit(1);
+            }
+            // ulogovan otvori scenu
 
 
         } else
@@ -91,17 +112,17 @@ public class StartMenuController implements Initializable
     }
 
     @FXML
-    void signInButtonClicked(ActionEvent event)
+    void signUpButtonClicked(ActionEvent event)
     {
 
-        if (signInUsernameField.getText().isEmpty() || signInConfPasswordField.getText().isEmpty() || signInConfPasswordField.getText().isEmpty())
+        if (signUpUsernameField.getText().isEmpty() || signUpConfPasswordField.getText().isEmpty() || signUpConfPasswordField.getText().isEmpty())
         {
             Alert al = new Alert(Alert.AlertType.ERROR);
             al.setContentText("EMPTY FIELDS");
             al.showAndWait();
             clearAll();
             return;
-        } else if (!signInPasswordField.getText().equals(signInConfPasswordField.getText()))
+        } else if (!signUpPasswordField.getText().equals(signUpConfPasswordField.getText()))
         {
             Alert al = new Alert(Alert.AlertType.ERROR);
             al.setContentText("PASSWORD DO NOT MATCH");
@@ -111,7 +132,7 @@ public class StartMenuController implements Initializable
         }
 
         boolean isAdmin = adminRb.isSelected();
-        Users user = new Users(signInUsernameField.getText(), signInPasswordField.getText(), isAdmin);
+        Users user = new Users(signUpUsernameField.getText(), signUpPasswordField.getText(), isAdmin);
 
         if (usersList.isEmpty() || !usersList.contains(user))
         {
@@ -140,17 +161,18 @@ public class StartMenuController implements Initializable
         usernameField.clear();
         passwordField.clear();
 
-        signInUsernameField.clear();
-        signInPasswordField.clear();
-        signInConfPasswordField.clear();
+        signUpUsernameField.clear();
+        signUpPasswordField.clear();
+        signUpConfPasswordField.clear();
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        System.out.println("INITIALIZE");
 
-        File file = new File("./AllUsers.ser");
+
+        File file = new File("." + File.separator + "AllUsers.ser");
         try
         {
             if (!file.exists())
@@ -184,7 +206,7 @@ public class StartMenuController implements Initializable
 
     public void serializeUserList()
     {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./AllUsers.ser")))
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("." + File.separator + "AllUsers.ser")))
         {
             oos.writeObject(usersList);
 
@@ -195,5 +217,6 @@ public class StartMenuController implements Initializable
         }
 
     }
+
 
 }
