@@ -10,6 +10,7 @@ public class UtilMethods
     private static Random random= new Random();
 
 
+    // generisi slucajan string od @size karaktera
     public static String randomString(int size)
     {
 
@@ -23,11 +24,16 @@ public class UtilMethods
         return buffer.toString();
     }
 
+    // generisi slucajan Car model
     public static CarModelImageEnum randomCarModel()
     {
         return CarModelImageEnum.values()[(new Random()).nextInt(CarModelImageEnum.values().length)];
     }
 
+    public static void clearScreen() // whatever
+    {
+        for (int i = 0; i < 15; ++i) System.out.println();
+    }
 
 
 }

@@ -2,17 +2,28 @@ package welcome;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class GarageApp extends Application
 {
+    @FXML
+    private ProgressBar progresBar=new ProgressBar(0.25f);
+
 
     public static void main(String[] args)
     {
@@ -21,14 +32,42 @@ public class GarageApp extends Application
 
 
     @Override
+    public void stop() throws Exception
+    {
+        System.out.println("exiting");
+        System.exit(1);
+    }
+
+    @Override
     public void start(Stage primaryStage) throws Exception
     {
+//        try
+//        {
+//            javafx.scene.Parent welcomeParent = javafx.fxml.FXMLLoader.load(getClass().getResource("../userGarageView/GarageTextView.fxml"));
+//            primaryStage.setTitle("Filip's Garage");
+//            Scene welcomeScene=new Scene(welcomeParent);
+//            primaryStage.setScene(welcomeScene);
+//            primaryStage.show();
+//
+//        }catch(Exception ex)
+//        {
+//            System.out.println("main exception");
+//        }
+
+
+//
+//
         javafx.scene.Parent welcomeParent = javafx.fxml.FXMLLoader.load(getClass().getResource("WelcomeScreenView.fxml"));
         primaryStage.setTitle("Filip's Garage");
         Scene welcomeScene=new Scene(welcomeParent);
         primaryStage.setScene(welcomeScene);
 
+
+        progresBar.progressProperty().unbind();
+        progresBar.setProgress(0.25);
+
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(3),welcomeParent);   // 3 sekunde
+
 
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
@@ -37,9 +76,11 @@ public class GarageApp extends Application
         primaryStage.initStyle(StageStyle.UNDECORATED); // initStyle bez minimize maximize, cloase
         primaryStage.show();
 
+
         fadeIn.setOnFinished( event->{
             try
             {
+
 
                Parent startMenuParent = FXMLLoader.load(getClass().getResource("../startMenu/StartMenuView.fxml"));
                 Scene startMenuScene=new Scene(startMenuParent);
@@ -48,21 +89,6 @@ public class GarageApp extends Application
                 startMenuStage.show();
                 primaryStage.hide();
 
-
-//                FXMLLoader loader = new FXMLLoader();
-//                loader.setLocation(getClass().getResource("../startMenu/StartMenuView.fxml")); // second fxml
-//                Parent secondRoot1 = loader.load();        // throws IOException
-//                Scene scene = new Scene(secondRoot1);
-//
-//                StartMenuController secondController = loader.getController();    // secondController
-//                secondController.setStage(currentStage);
-//                currentStage.setScene(scene);
-//                currentStage.show();
-
-//                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//                window.setScene(scene);
-//                window.setTitle("Second Window Title");      // set Title
-//                window.show();
 
             }catch(IOException ex)
             {
@@ -75,4 +101,5 @@ public class GarageApp extends Application
 
        // primaryStage.hide();
     }
+
 }
