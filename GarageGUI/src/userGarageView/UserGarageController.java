@@ -72,9 +72,9 @@ public class UserGarageController implements Initializable
                     {
 
                         String toString = userModel.toString();
-
+//
                         platformTextArea.setText(toString);
-                   //     System.out.println(toString);
+//                   //     System.out.println(toString);
 
 
                         try
