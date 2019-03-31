@@ -7,17 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="556.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userGarageView.UserGarageController">
+<AnchorPane prefHeight="556.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userGarageView.UserGarageController">
    <children>
-      <Button layoutX="75.0" layoutY="483.0" mnemonicParsing="false" onAction="#backButtonClicked" text="Back" />
-      <ComboBox fx:id="platformNumComboBox" layoutX="362.0" layoutY="483.0" onAction="#platformNumComboBoxSelect" prefHeight="26.0" prefWidth="69.0" promptText="1" />
-      <Button layoutX="159.0" layoutY="483.0" mnemonicParsing="false" onAction="#newCarButtonClicked" text="New Car" />
-      <Button layoutX="257.0" layoutY="483.0" mnemonicParsing="false" onAction="#removeCarButtonClicked" text="Remove Car" />
+      <Button layoutX="75.0" layoutY="471.0" mnemonicParsing="false" onAction="#backButtonClicked" text="Back" />
+      <ComboBox fx:id="platformNumComboBox" layoutX="369.0" layoutY="471.0" onAction="#platformNumComboBoxSelect" prefHeight="26.0" prefWidth="69.0" />
+      <Button layoutX="160.0" layoutY="471.0" mnemonicParsing="false" onAction="#newCarButtonClicked" text="New Car" />
+      <Button layoutX="252.0" layoutY="470.0" mnemonicParsing="false" onAction="#removeCarButtonClicked" text="Remove Car" />
       <TextArea fx:id="platformTextArea" editable="false" layoutX="45.0" layoutY="39.0" prefHeight="410.0" prefWidth="343.0" promptText=" " style="-fx-text-alignment: center;">
          <font>
             <Font name="Bitstream Vera Sans Mono Bold" size="29.0" />
          </font>
       </TextArea>
       <TextField fx:id="textField" layoutX="416.0" layoutY="118.0" prefHeight="189.0" prefWidth="211.0" />
+      <Button layoutX="466.0" layoutY="322.0" mnemonicParsing="false" onAction="#showTextFieldPlatform" text="show platform" />
+      <TextField fx:id="newCarNumField" layoutX="171.0" layoutY="510.0" prefHeight="26.0" prefWidth="50.0" />
    </children>
 </AnchorPane>

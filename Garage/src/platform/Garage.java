@@ -48,8 +48,9 @@ public class Garage
 
         for(int i=0;i<platforms.size();i++)
             if (platforms.get(i).getNumFreeSpaces() != 0)
+            {
                 return i;
-
+            }
 
         return 0;   // ako nema mjesta
     }
@@ -60,6 +61,7 @@ public class Garage
         for(int row=2,col=0;row<Platform.rowNum;row++)
             if(platforms.get(floorNum).getFieldOnPosition(row,col).isFree())
             {
+                platforms.get(floorNum).decrementNumOfFreeSpaces();
                 platforms.get(floorNum).getFieldOnPosition(row,col).setFree(false);
                 return platforms.get(floorNum).getFieldOnPosition(row,col);
             }
@@ -70,6 +72,7 @@ public class Garage
             for(int row=2;row<Platform.rowNum-2;row++)
                 if(platforms.get(floorNum).getFieldOnPosition(row,col).isFree())
                 {
+                    platforms.get(floorNum).decrementNumOfFreeSpaces();
                     platforms.get(floorNum).getFieldOnPosition(row,col).setFree(false);
                     return platforms.get(floorNum).getFieldOnPosition(row,col);
                 }
@@ -79,10 +82,12 @@ public class Garage
         for(int row=2,col=7;row<Platform.rowNum;row++)
             if(platforms.get(floorNum).getFieldOnPosition(row,col).isFree())
             {
+                platforms.get(floorNum).decrementNumOfFreeSpaces();
                 platforms.get(floorNum).getFieldOnPosition(row,col).setFree(false);
                 return platforms.get(floorNum).getFieldOnPosition(row,col);
             }
 
+        System.out.println("findFreeParkingField -> null exception");
         return null;
     }
 
@@ -95,6 +100,20 @@ public class Garage
     {
         return platforms.stream()
                         .anyMatch(freeSpace-> freeSpace.getNumFreeSpaces()!=0);
+    }
+
+
+    public void setVehicleOnField(Vehicle vehicle)
+    {
+        if(vehicle==null || platforms.size()<vehicle.getCurrentFloor())
+        {
+            System.out.println("vehicle object is null!! or not enough floors");
+        }
+        int row= vehicle.getCurrentRow();
+        int col = vehicle.getCurrentCol();
+
+        platforms.get(vehicle.getCurrentFloor()).fields[row][col].setVehicleOnField(vehicle);
+
     }
 
 }

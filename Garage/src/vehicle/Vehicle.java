@@ -17,7 +17,6 @@ public class Vehicle extends Thread implements Serializable
     private String carName;
     private String chassis;
     private CarModelImageEnum carModelImageEnum = null;
-    // private MovementEnum currentMoveDirection =MovementEnum.RIGHT;
     private String registerNum;
 
 
@@ -37,10 +36,23 @@ public class Vehicle extends Thread implements Serializable
 //        synchronized (Lock)
 //        {
 
-            if (!Garage.platforms.get(0).getFieldOnPosition(1, 0).isFree())
+
+            while(!Garage.platforms.get(0).getFieldOnPosition(1, 0).isFree())
             {
-                return;     // cant enter garage if [0][0] not free
+                synchronized (Lock)
+                {
+                    try
+                    {
+                        Thread.sleep(300);
+                    }catch(InterruptedException ex)
+                    {
+                        System.out.println("ulaz nije slobodan");
+                        ex.printStackTrace();
+                    }
+
+                }
             }
+
 
             currentRow = 1;
             currentCol = 0;
@@ -53,10 +65,16 @@ public class Vehicle extends Thread implements Serializable
           if (isInGarage)
             {
 
-                floorNum = Garage.findFloorWithFreeParkingField();   // nadji sprat sa slobodnim mjestom
-              //  floorNum=1;
+                synchronized (Lock)
+                {
+                    floorNum = Garage.findFloorWithFreeParkingField();   // nadji sprat sa slobodnim mjestom
+                    destination = Garage.findFreeParkingField(floorNum); // nadji slobodno mjesto na tom spratu
+
+                }
+
                 goToFloorNum(floorNum);
-                destination = Garage.findFreeParkingField(floorNum); // nadji slobodno mjesto na tom spratu
+
+
                 parkOnGivenField(destination);
                 isMoving=false;
 
@@ -120,51 +138,75 @@ public class Vehicle extends Thread implements Serializable
         return isMoving;
     }
 
+    public int getCurrentRow()
+    {
+        return currentRow;
+    }
+
+    public int getCurrentCol()
+    {
+        return currentCol;
+    }
+
+    public int getCurrentFloor()
+    {
+        return currentFloor;
+    }
 
     void goToFloorNum(int floorNum) // vozi na @FloorNum sprat // TODO: mozda prepraviti u goUpToFloorNum // TODO: mozda dodati metodu goDownToFloorNum;
     {
-
-        // TODO: pazi na pravilo desne strane
-        for (; currentFloor < floorNum; currentFloor++)
+        while(currentFloor<floorNum)
         {
-            for ( currentCol = 0; currentCol < Platform.coloumnNum - 1; currentCol++)
-            {
-                // vidi ima li auta ispred/guzve
-                // vidi jel Field slobodno
-
-               // Garage.platforms.get(i).showPlatform();
-                //System.out.println("\n");
-
-
-                Garage.platforms.get(currentFloor).getFieldOnPosition(1, currentCol).removeVehicleFromField();
-                Garage.platforms.get(currentFloor).getFieldOnPosition(1, currentCol + 1).setVehicleOnField(this);
-
-                try
-                {
-                    sleep(600);
-                } catch (InterruptedException ex)
-                {
-                    ex.printStackTrace();
-                }
-
-            }
-
-            this.currentFloor++;
-            //Garage.platforms.get(i).showPlatform();
-            //System.out.println("\n");
-            Garage.platforms.get(currentFloor+1).getFieldOnPosition(1, 0).setVehicleOnField(this);
-            Garage.platforms.get(currentFloor).getFieldOnPosition(1, Platform.coloumnNum - 1).removeVehicleFromField();
-
-            try
-            {
-                sleep(600);
-            } catch (InterruptedException ex)
-            {
-                ex.printStackTrace();
-            }
-
-
+            moveRight();
         }
+
+
+//        // TODO: pazi na pravilo desne strane
+//        for (; currentFloor < floorNum; currentFloor++)
+//        {
+//            for ( ; currentCol < Platform.coloumnNum - 1; currentCol++)
+//            {
+//                // vidi ima li auta ispred/guzve
+//                // vidi jel Field slobodno
+//
+//               // Garage.platforms.get(i).showPlatform();
+//                //System.out.println("\n");
+//
+//
+//                Garage.platforms.get(currentFloor).getFieldOnPosition(1, currentCol).removeVehicleFromField();
+//                Garage.platforms.get(currentFloor).getFieldOnPosition(1, currentCol + 1).setVehicleOnField(this);
+//
+//                try
+//                {
+//                    sleep(600);
+//                } catch (InterruptedException ex)
+//                {
+//                    ex.printStackTrace();
+//                }
+//
+//            }
+//
+//            this.currentFloor++;
+//
+//            //Garage.platforms.get(i).showPlatform();
+//            //System.out.println("\n");
+//            Garage.platforms.get(currentFloor).getFieldOnPosition(1, 0).setVehicleOnField(this);
+//            currentRow=1;
+//            currentCol=0;
+//            Garage.platforms.get(currentFloor-1).getFieldOnPosition(1, Platform.coloumnNum - 1).removeVehicleFromField();
+//
+//            try
+//            {
+//                sleep(600);
+//            } catch (InterruptedException ex)
+//            {
+//                ex.printStackTrace();
+//            }
+//
+//
+//        }
+
+        //TODO: while loop with moveRight()
 
         //NOT TODO: reset currentRow = 0
 

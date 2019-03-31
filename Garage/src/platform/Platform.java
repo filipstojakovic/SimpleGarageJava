@@ -3,6 +3,7 @@ package platform;
 import platform.Field.Field;
 import platform.Field.FieldTypeEnum;
 import utils.UtilMethods;
+import vehicle.Vehicle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,19 +14,13 @@ public class Platform implements Serializable
 
     public static final int coloumnNum = 8;
     public static final int rowNum = 10;
-    public static final Field[][] fields = new Field[rowNum][coloumnNum];
+    public Field[][] fields = new Field[rowNum][coloumnNum];    // pokusaj staviti private
     private ArrayList<String> textField;
     private int floorNum;   // jos cemo vidjeti da li ostati
     private int numFreeSpaces = 28;
    // private static int floorNum=0;
 
-    private String refresh()
-    {
-        String textFieldAsString="";
 
-
-        return textFieldAsString;
-    }
     public Platform()
     {
         this(0);    // radi testiranja
@@ -82,7 +77,7 @@ public class Platform implements Serializable
 
    // public void setFieldOnPosition(int i, int j) { }
 
-    public static Field[][] getFields()
+    public Field[][] getFields()
     {
         return fields;
     }   // vidjecemo hoces li biti public static
@@ -119,7 +114,10 @@ public class Platform implements Serializable
         for (int row = 2; row < Platform.rowNum; row++)
         {
             if (fields[row][0].isFree())
+            {
+                decrementNumOfFreeSpaces();
                 return fields[row][0];
+            }
         }
 
 
@@ -128,14 +126,20 @@ public class Platform implements Serializable
             for(int row=2;row<Platform.rowNum-2;row++)
             {
                 if(fields[row][column].isFree())
+                {
+                    decrementNumOfFreeSpaces();
                     return fields[row][column];
+                }
             }
         }
 
         for (int row = 2; row < Platform.rowNum; row++)
         {
             if (fields[row][7].isFree())
+            {
+                decrementNumOfFreeSpaces();
                 return fields[row][7];
+            }
         }
 
         return null;    // nema slobodnog mjesta -> ne bi se trebalo nikad desiti jer se provjerava prvo ima li mjesta
@@ -146,10 +150,14 @@ public class Platform implements Serializable
 
 
 
+
+
+
+
     //prikaz platforme
     public void showPlatform()
     {
-        UtilMethods.clearScreen();
+       // UtilMethods.clearScreen();
 
         for (int i = 0; i < rowNum; i++)
         {

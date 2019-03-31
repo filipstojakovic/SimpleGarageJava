@@ -32,74 +32,75 @@ public class GarageApp extends Application
 
 
     @Override
-    public void stop() throws Exception
-    {
-        System.out.println("exiting");
-        System.exit(1);
-    }
-
-    @Override
     public void start(Stage primaryStage) throws Exception
     {
-//        try
-//        {
-//            javafx.scene.Parent welcomeParent = javafx.fxml.FXMLLoader.load(getClass().getResource("../userGarageView/GarageTextView.fxml"));
-//            primaryStage.setTitle("Filip's Garage");
-//            Scene welcomeScene=new Scene(welcomeParent);
-//            primaryStage.setScene(welcomeScene);
-//            primaryStage.show();
-//
-//        }catch(Exception ex)
-//        {
-//            System.out.println("main exception");
-//        }
+        try
+        {
+            javafx.scene.Parent welcomeParent = javafx.fxml.FXMLLoader.load(getClass().getResource("../userGarageView/GarageTextView.fxml"));
+            primaryStage.setTitle("Filip's Garage");
+            Scene welcomeScene=new Scene(welcomeParent);
+            primaryStage.setScene(welcomeScene);
+            primaryStage.show();
+
+        }catch(Exception ex)
+        {
+            System.out.println("main exception");
+        }
 
 
 //
 //
-        javafx.scene.Parent welcomeParent = javafx.fxml.FXMLLoader.load(getClass().getResource("WelcomeScreenView.fxml"));
-        primaryStage.setTitle("Filip's Garage");
-        Scene welcomeScene=new Scene(welcomeParent);
-        primaryStage.setScene(welcomeScene);
-
-
-        progresBar.progressProperty().unbind();
-        progresBar.setProgress(0.25);
-
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(3),welcomeParent);   // 3 sekunde
-
-
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.setCycleCount(1);
-        fadeIn.play();
-        primaryStage.initStyle(StageStyle.UNDECORATED); // initStyle bez minimize maximize, cloase
-        primaryStage.show();
-
-
-        fadeIn.setOnFinished( event->{
-            try
-            {
-
-
-               Parent startMenuParent = FXMLLoader.load(getClass().getResource("../startMenu/StartMenuView.fxml"));
-                Scene startMenuScene=new Scene(startMenuParent);
-                Stage startMenuStage = new Stage(); // zbog drugog initStyle
-                startMenuStage.setScene(startMenuScene);
-                startMenuStage.show();
-                primaryStage.hide();
-
-
-            }catch(IOException ex)
-            {
-                System.out.println("KAPUT");
-                ex.printStackTrace();
-            }
-        });
+//        javafx.scene.Parent welcomeParent = javafx.fxml.FXMLLoader.load(getClass().getResource("WelcomeScreenView.fxml"));
+//        primaryStage.setTitle("Filip's Garage");
+//        Scene welcomeScene=new Scene(welcomeParent);
+//        primaryStage.setScene(welcomeScene);
+//
+//
+//        progresBar.progressProperty().unbind();
+//        progresBar.setProgress(0.25);
+//
+//        FadeTransition fadeIn = new FadeTransition(Duration.seconds(3),welcomeParent);   // 3 sekunde
+//
+//
+//        fadeIn.setFromValue(0);
+//        fadeIn.setToValue(1);
+//        fadeIn.setCycleCount(1);
+//        fadeIn.play();
+//        primaryStage.initStyle(StageStyle.UNDECORATED); // initStyle bez minimize maximize, cloase
+//        primaryStage.show();
+//
+//
+//        fadeIn.setOnFinished( event->{
+//            try
+//            {
+//
+//
+//               Parent startMenuParent = FXMLLoader.load(getClass().getResource("../startMenu/StartMenuView.fxml"));
+//                Scene startMenuScene=new Scene(startMenuParent);
+//                Stage startMenuStage = new Stage(); // zbog drugog initStyle
+//                startMenuStage.setScene(startMenuScene);
+//                startMenuStage.show();
+//                primaryStage.hide();
+//
+//
+//            }catch(IOException ex)
+//            {
+//                System.out.println("KAPUT");
+//                ex.printStackTrace();
+//            }
+//        });
 
 
 
        // primaryStage.hide();
+    }
+
+
+    @Override
+    public void stop() throws Exception
+    {
+        System.out.println("exiting");
+        System.exit(1);
     }
 
 }
